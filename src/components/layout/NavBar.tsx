@@ -1,6 +1,8 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function NavBar() {
+  const navigation = useNavigate();
   return (
     <div
       style={{
@@ -11,9 +13,21 @@ export default function NavBar() {
         borderTop: '1px solid #ccc',
       }}
     >
-      <div>홈</div>
+      <div
+        onClick={() => {
+          navigation('/');
+        }}
+      >
+        홈
+      </div>
       <div>소비캘린더</div>
-      <div>추가</div>
+      <div
+        onClick={() => {
+          navigation('/add');
+        }}
+      >
+        추가
+      </div>
     </div>
   );
 }
