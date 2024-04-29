@@ -28,6 +28,13 @@ export default function NavBar() {
       >
         추가
       </div>
+      <div
+        onClick={() => {
+          navigation('/add-history');
+        }}
+      >
+        내역 추가
+      </div>
     </div>
   );
 }
