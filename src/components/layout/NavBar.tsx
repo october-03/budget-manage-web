@@ -20,7 +20,13 @@ export default function NavBar() {
       >
         홈
       </div>
-      <div>소비캘린더</div>
+      <div
+        onClick={() => {
+          navigation('/calendar');
+        }}
+      >
+        소비캘린더
+      </div>
       <div
         onClick={() => {
           navigation('/add');

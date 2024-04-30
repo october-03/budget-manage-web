@@ -49,6 +49,23 @@ export interface CardSearch {
   total_count: number;
 }
 
+export interface MonthlyStats {
+  dailyStats: DailyStat[];
+  expense: number;
+  income: number;
+  card: number;
+  balance: number;
+}
+
+export interface DailyStat {
+  date: string;
+  card: number;
+  expense: number;
+  income: number;
+}
+
+export interface MonthlyStatsResponse extends DefaultResponse<MonthlyStats> {}
+
 export interface BankSearchResponse extends DefaultResponse<BankSearch> {}
 
 export interface CardSearchResponse extends DefaultResponse<CardSearch> {}

@@ -1,0 +1,22 @@
+.calendar-box {
+  width: 13vw;
+  height: 100px;
+  /* border: 1px solid #eee; */
+  border-collapse: collapse;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.calendar-box-amount {
+  font-size: 11px;
+  text-align: center;
+  width: fit-content;
+  padding: 0 2px;
+}
+
+.calendar-box-amount-box {
+  display: flex;
+  justify-content: center;
+  margin-top: 2px;
+}
