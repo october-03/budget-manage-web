@@ -6,6 +6,7 @@ import SubLayout from './components/layout/SubLayout';
 import Home from './pages/home/Home';
 import Add from './pages/add/Add';
 import AddHistory from './pages/add-history/AddHistory';
+import History from './pages/history/History';
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
         <Route path="/add-history" element={<AddHistory />} />
       </Route>
       <Route element={<SubLayout />}>
-        <Route path="sub" element={<div>SUB</div>} />
+        <Route path="/history/:type/:id" element={<History />} />
       </Route>
     </Routes>
   );
