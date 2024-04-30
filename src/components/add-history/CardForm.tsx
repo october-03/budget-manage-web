@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import ApiService from '../../utils/ApiService';
 import { Cards, SearchCardsResponse } from '../../types/ApiResponse.dto';
+import dayjs from 'dayjs';
 
 interface FormInput {
   paymentType: 'FULL' | 'INSTALLMENTS';
@@ -26,6 +27,7 @@ export default function CardForm() {
     const formData = {
       ...data,
       paymentType,
+      transactionDate: dayjs(data.transactionDate).format('YYYY-MM-DD HH:mm'),
     };
 
     const res = await ApiService.post('card/transaction', formData);
@@ -74,7 +76,7 @@ export default function CardForm() {
       </div>
       <div>
         <p>거래일</p>
-        <input {...register('transactionDate', { required: true })} />
+        <input type="datetime-local" {...register('transactionDate', { required: true })} />
       </div>
       <div>
         <p>카드</p>

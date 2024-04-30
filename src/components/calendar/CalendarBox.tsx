@@ -25,14 +25,14 @@ export default function CalendarBox(props: PropsType) {
         )}
         {data.income !== 0 && (
           <div className="calendar-box-amount-box">
-            <p className="calendar-box-amount" style={{ backgroundColor: 'red' }}>
+            <p className="calendar-box-amount" style={{ backgroundColor: 'green' }}>
               {data.income.toLocaleString()}
             </p>
           </div>
         )}
         {data.expense !== 0 && (
           <div className="calendar-box-amount-box">
-            <p className="calendar-box-amount" style={{ backgroundColor: 'green' }}>
+            <p className="calendar-box-amount" style={{ backgroundColor: 'red' }}>
               {data.expense.toLocaleString()}
             </p>
           </div>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import ApiService from '../../utils/ApiService';
 import { Accounts, SearchAccountsResponse } from '../../types/ApiResponse.dto';
+import dayjs from 'dayjs';
 
 interface FormInput {
   transactionType: 'INCOME' | 'EXPENSE';
@@ -25,6 +26,7 @@ export default function AccountForm() {
     const formData = {
       ...data,
       transactionType,
+      transactionDate: dayjs(data.transactionDate).format('YYYY-MM-DD HH:mm'),
     };
 
     const res = await ApiService.post('account/transaction', formData);
@@ -67,7 +69,7 @@ export default function AccountForm() {
       </div>
       <div>
         <p>거래일</p>
-        <input {...register('transactionDate', { required: true })} />
+        <input type="datetime-local" {...register('transactionDate', { required: true })} />
       </div>
       <div>
         <p>계좌</p>
