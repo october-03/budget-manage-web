@@ -3,11 +3,23 @@ import ApiService from '../../utils/ApiService';
 import { DailyStat, MonthlyStatsResponse } from '../../types/ApiResponse.dto';
 import dayjs from 'dayjs';
 import CalendarLine from './CalendarLine';
+import DailyHistoryModal from './DailyHistoryModal';
 
 export default function CalendarContainer() {
   const [data, setData] = useState<DailyStat[][]>([]);
   const [date, setDate] = useState<string>(dayjs().startOf('month').format('YYYY-MM-DD'));
   const [maxDate, setMaxDate] = useState<string>(dayjs().startOf('month').format('YYYY-MM-DD'));
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [modalDate, setModalDate] = useState<string>('');
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
+  const openModal = (targetDate: string) => {
+    setModalOpen(true);
+    setModalDate(targetDate);
+  };
 
   const fetch = async () => {
     const res = await ApiService.get<MonthlyStatsResponse>(`/search/monthly-stats/${dayjs(date).format('YYYY-MM')}`);
@@ -94,8 +106,9 @@ export default function CalendarContainer() {
         </div>
       </div>
       {data.map((item) => {
-        return <CalendarLine data={item} />;
+        return <CalendarLine data={item} openModal={openModal} />;
       })}
+      {modalOpen && <DailyHistoryModal handleModalClose={closeModal} date={modalDate} />}
     </div>
   );
 }

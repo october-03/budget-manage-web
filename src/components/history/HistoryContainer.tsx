@@ -53,7 +53,7 @@ export default function HistoryContainer(req: PropsType) {
 
 type PropsType = {
   type: 'bank' | 'card';
-  id: string;
+  id?: string;
   startDate: string;
   endDate: string;
 };

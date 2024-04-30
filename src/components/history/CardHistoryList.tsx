@@ -15,11 +15,14 @@ export default function CardHistoryList(req: PropsType) {
 
   const fetch = async () => {
     const request: CardSearchInterface = {
-      card_id: Number(id),
       startDate,
       endDate,
       page,
     };
+
+    if (id) {
+      request.card_id = Number(id);
+    }
 
     if (transactionType !== 'all') {
       request.transaction_type = transactionType;
@@ -100,7 +103,7 @@ export default function CardHistoryList(req: PropsType) {
 }
 
 type PropsType = {
-  id: string;
+  id?: string;
   startDate: string;
   endDate: string;
   searchKeyword?: string;

@@ -3,10 +3,17 @@ import { DailyStat } from '../../types/ApiResponse.dto';
 import dayjs from 'dayjs';
 
 export default function CalendarBox(props: PropsType) {
-  const { data } = props;
+  const { data, openModal } = props;
 
   return (
-    <div className="calendar-box">
+    <div
+      className="calendar-box"
+      onClick={() => {
+        if (data.date !== '') {
+          openModal(data.date);
+        }
+      }}
+    >
       <div>{data.date !== '' && <p style={{ textAlign: 'center' }}>{dayjs(data.date).date()}</p>}</div>
       <div>
         {data.card !== 0 && (
@@ -37,4 +44,5 @@ export default function CalendarBox(props: PropsType) {
 
 type PropsType = {
   data: DailyStat;
+  openModal: (date: string) => void;
 };

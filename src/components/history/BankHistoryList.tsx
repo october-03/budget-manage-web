@@ -21,11 +21,14 @@ export default function BankHistoryList(req: PropsType) {
 
   const fetch = async () => {
     const request: BankSearchInterface = {
-      account_id: Number(id),
       startDate,
       endDate,
       page,
     };
+
+    if (id) {
+      request.account_id = Number(id);
+    }
 
     if (transactionType !== 'all') {
       request.transaction_type = transactionType;
@@ -106,7 +109,7 @@ export default function BankHistoryList(req: PropsType) {
 }
 
 type PropsType = {
-  id: string;
+  id?: string;
   startDate: string;
   endDate: string;
   searchKeyword?: string;

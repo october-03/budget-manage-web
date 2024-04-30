@@ -20,3 +20,26 @@
   justify-content: center;
   margin-top: 2px;
 }
+
+.daily-history-modal {
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  top: 0;
+  z-index: 100;
+  flex-direction: column;
+}
+
+.daily-history-modal > div:first-child {
+  flex: 1;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.daily-history-modal > div:last-child {
+  flex: 5;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
