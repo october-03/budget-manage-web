@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { CardSearchHistory, CardSearchInterface } from '../../utils/SearchHistory';
-import { Card } from '../../types/ApiResponse.dto';
+import { CardHistory } from '../../types/ApiResponse.dto';
 import CardHistoryCard from './CardHistoryCard';
 
 export default function CardHistoryList(req: PropsType) {
   const { id, startDate, endDate, searchKeyword, page, isMore, setPage } = req;
 
-  const [data, setData] = useState<Card[]>([]);
+  const [data, setData] = useState<CardHistory[]>([]);
   const [count, setCount] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
   const [fullAmount, setFullAmount] = useState(0);

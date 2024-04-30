@@ -1,5 +1,5 @@
 import React from 'react';
-import { Bank, Card } from '../../types/ApiResponse.dto';
+import { BankHistory } from '../../types/ApiResponse.dto';
 import dayjs from 'dayjs';
 
 export default function BankHistoryCard(req: PropsType) {
@@ -17,5 +17,5 @@ export default function BankHistoryCard(req: PropsType) {
 }
 
 type PropsType = {
-  data: Bank;
+  data: BankHistory;
 };

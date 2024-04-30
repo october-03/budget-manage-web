@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import ApiService from '../../utils/ApiService';
+import { Accounts, SearchAccountsResponse } from '../../types/ApiResponse.dto';
 
 interface FormInput {
   transactionType: 'INCOME' | 'EXPENSE';
@@ -12,6 +13,7 @@ interface FormInput {
 
 export default function AccountForm() {
   const [transactionType, setTransactionType] = useState<FormInput['transactionType']>('INCOME');
+  const [accountList, setAccountList] = useState<Accounts[]>([]);
 
   const {
     register,
@@ -27,6 +29,15 @@ export default function AccountForm() {
 
     const res = await ApiService.post('account/transaction', formData);
   };
+
+  const fetch = async () => {
+    const res = await ApiService.get<SearchAccountsResponse>('account/all');
+    setAccountList(res.data);
+  };
+
+  useEffect(() => {
+    fetch();
+  }, []);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} style={{ display: 'flex', flexDirection: 'column' }}>
@@ -46,10 +57,31 @@ export default function AccountForm() {
           지출
         </div>
       </div>
-      <input {...register('description')} />
-      <input {...register('amount', { valueAsNumber: true })} />
-      <input {...register('transactionDate')} />
-      <input {...register('accountId')} />
+      <div>
+        <p>설명</p>
+        <input {...register('description', { required: true })} />
+      </div>
+      <div>
+        <p>금액</p>
+        <input {...register('amount', { valueAsNumber: true, required: true })} />
+      </div>
+      <div>
+        <p>거래일</p>
+        <input {...register('transactionDate', { required: true })} />
+      </div>
+      <div>
+        <p>계좌</p>
+        {/* <input {...register('accountId')} /> */}
+        <select {...register('accountId', { required: true })}>
+          {accountList.map((account) => {
+            return (
+              <option key={account.id} value={account.id}>
+                {account.name}
+              </option>
+            );
+          })}
+        </select>
+      </div>
       <button type="submit">등록</button>
     </form>
   );

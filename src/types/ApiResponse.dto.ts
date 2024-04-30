@@ -15,7 +15,7 @@ export interface AllSimpleStat {
   card: SimpleStat[];
 }
 
-export interface Bank {
+export interface BankHistory {
   id: number;
   transaction_type: string;
   amount: number;
@@ -24,7 +24,7 @@ export interface Bank {
   account_id: number;
 }
 
-export interface Card {
+export interface CardHistory {
   id: number;
   payment_type: string;
   amount: number;
@@ -33,16 +33,16 @@ export interface Card {
   card_id: number;
 }
 
-export interface BankSearch {
-  history: Bank[];
+export interface BankHistorySearch {
+  history: BankHistory[];
   income_amount: number;
   expense_amount: number;
   total_amount: number;
   total_count: number;
 }
 
-export interface CardSearch {
-  history: Card[];
+export interface CardHistorySearch {
+  history: CardHistory[];
   full_amount: number;
   installments_amount: number;
   total_amount: number;
@@ -64,10 +64,27 @@ export interface DailyStat {
   income: number;
 }
 
+export interface Accounts {
+  id: number;
+  name: string;
+  balance: number;
+  created_at: string;
+}
+
+export interface Cards {
+  id: number;
+  name: string;
+  created_at: string;
+}
+
+export interface SearchAccountsResponse extends DefaultResponse<Accounts[]> {}
+
+export interface SearchCardsResponse extends DefaultResponse<Cards[]> {}
+
 export interface MonthlyStatsResponse extends DefaultResponse<MonthlyStats> {}
 
-export interface BankSearchResponse extends DefaultResponse<BankSearch> {}
+export interface BankSearchResponse extends DefaultResponse<BankHistorySearch> {}
 
-export interface CardSearchResponse extends DefaultResponse<CardSearch> {}
+export interface CardSearchResponse extends DefaultResponse<CardHistorySearch> {}
 
 export interface AllSimpleStatResponse extends DefaultResponse<AllSimpleStat> {}

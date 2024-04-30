@@ -5,14 +5,14 @@ import {
   CardSearchHistory,
   CardSearchInterface,
 } from '../../utils/SearchHistory';
-import { Bank, Card } from '../../types/ApiResponse.dto';
+import { BankHistory } from '../../types/ApiResponse.dto';
 import CardHistoryCard from './CardHistoryCard';
 import BankHistoryCard from './BankHistoryCard';
 
 export default function BankHistoryList(req: PropsType) {
   const { id, startDate, endDate, searchKeyword, page, isMore, setPage } = req;
 
-  const [data, setData] = useState<Bank[]>([]);
+  const [data, setData] = useState<BankHistory[]>([]);
   const [count, setCount] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
   const [expense, setExpense] = useState(0);

@@ -20,8 +20,14 @@ export default function AccountForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} style={{ display: 'flex', flexDirection: 'column' }}>
-      <input {...register('name', { required: true })} />
-      <input type="number" {...register('initBalance', { required: true })} />
+      <div>
+        <p>계좌명</p>
+        <input {...register('name', { required: true })} />
+      </div>
+      <div>
+        <p>초기 잔액</p>
+        <input type="number" {...register('initBalance', { required: true })} />
+      </div>
       <button type="submit">등록</button>
     </form>
   );

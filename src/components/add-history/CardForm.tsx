@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import ApiService from '../../utils/ApiService';
+import { Cards, SearchCardsResponse } from '../../types/ApiResponse.dto';
 
 interface FormInput {
   paymentType: 'FULL' | 'INSTALLMENTS';
@@ -13,6 +14,7 @@ interface FormInput {
 
 export default function CardForm() {
   const [paymentType, setPaymentType] = useState<FormInput['paymentType']>('FULL');
+  const [cards, setCards] = useState<Cards[]>([]);
 
   const {
     register,
@@ -28,6 +30,15 @@ export default function CardForm() {
 
     const res = await ApiService.post('card/transaction', formData);
   };
+
+  const fetch = async () => {
+    const res = await ApiService.get<SearchCardsResponse>('card/all');
+    setCards(res.data);
+  };
+
+  useEffect(() => {
+    fetch();
+  }, []);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} style={{ display: 'flex', flexDirection: 'column' }}>
@@ -47,11 +58,37 @@ export default function CardForm() {
           할부
         </div>
       </div>
-      {paymentType === 'INSTALLMENTS' && <input {...register('installmentMonths')} />}
-      <input {...register('description')} />
-      <input {...register('amount', { valueAsNumber: true })} />
-      <input {...register('transactionDate')} />
-      <input {...register('cardId')} />
+      {paymentType === 'INSTALLMENTS' && (
+        <div>
+          <p>할부 개월 수</p>
+          <input {...register('installmentMonths', { required: true })} />
+        </div>
+      )}
+      <div>
+        <p>설명</p>
+        <input {...register('description', { required: true })} />
+      </div>
+      <div>
+        <p>금액</p>
+        <input {...register('amount', { valueAsNumber: true, required: true })} />
+      </div>
+      <div>
+        <p>거래일</p>
+        <input {...register('transactionDate', { required: true })} />
+      </div>
+      <div>
+        <p>카드</p>
+        {/* <input {...register('cardId')} /> */}
+        <select {...register('cardId', { required: true })}>
+          {cards.map((card) => {
+            return (
+              <option key={card.id} value={card.id}>
+                {card.name}
+              </option>
+            );
+          })}
+        </select>
+      </div>
       <button type="submit">등록</button>
     </form>
   );
