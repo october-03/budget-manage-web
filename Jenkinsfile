@@ -20,8 +20,8 @@ pipeline {
 
     stage('deploy') {
       steps {
-        sh 'docker stop budget-manage-web'
-        sh 'docker rm budget-manage-web'
+        sh 'docker stop budget-manage-web' || true
+        sh 'docker rm budget-manage-web' || true
         sh 'docker run -d -p 61902:80 --name budget-manage-web budget-manage-web'
       }
     }
