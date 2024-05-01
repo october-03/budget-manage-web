@@ -18,16 +18,15 @@ export default function Home() {
   }, []);
 
   return (
-    <div>
-      <h1>{dayjs().format('YYYY년 MM월 현황')}</h1>
-      <h3>계좌</h3>
-      <div>
+    <div style={{ padding: 10 }}>
+      <h3 className="home-card-title">계좌</h3>
+      <div className="home-container">
         {stat.bank.map((bank) => {
           return <StatCard stat={bank} type="bank" />;
         })}
       </div>
-      <h3>카드</h3>
-      <div>
+      <h3 className="home-card-title">카드</h3>
+      <div className="home-container">
         {stat.card.map((card) => {
           return <StatCard stat={card} type="card" />;
         })}
