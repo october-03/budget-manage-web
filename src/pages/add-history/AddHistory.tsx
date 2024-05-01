@@ -6,7 +6,7 @@ export default function AddHistory() {
   const [tab, setTab] = useState<'card' | 'account'>('card');
 
   return (
-    <div>
+    <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
       <div>
         <div
           onClick={() => {

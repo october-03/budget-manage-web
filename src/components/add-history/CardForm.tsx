@@ -43,55 +43,59 @@ export default function CardForm() {
   }, []);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} style={{ display: 'flex', flexDirection: 'column' }}>
-      <div>
-        <div
-          onClick={() => {
-            setPaymentType('FULL');
-          }}
-        >
-          일시불
-        </div>
-        <div
-          onClick={() => {
-            setPaymentType('INSTALLMENTS');
-          }}
-        >
-          할부
-        </div>
-      </div>
-      {paymentType === 'INSTALLMENTS' && (
+    <form onSubmit={handleSubmit(onSubmit)} className="form">
+      <div style={{ flex: 1 }}>
         <div>
-          <p>할부 개월 수</p>
-          <input {...register('installmentMonths', { required: true })} />
+          <div
+            onClick={() => {
+              setPaymentType('FULL');
+            }}
+          >
+            일시불
+          </div>
+          <div
+            onClick={() => {
+              setPaymentType('INSTALLMENTS');
+            }}
+          >
+            할부
+          </div>
         </div>
-      )}
-      <div>
-        <p>설명</p>
-        <input {...register('description', { required: true })} />
+        {paymentType === 'INSTALLMENTS' && (
+          <div className="form-input">
+            <p>할부 개월 수</p>
+            <input {...register('installmentMonths', { required: true })} />
+          </div>
+        )}
+        <div className="form-input">
+          <p>설명</p>
+          <input {...register('description', { required: true })} />
+        </div>
+        <div className="form-input">
+          <p>금액</p>
+          <input {...register('amount', { valueAsNumber: true, required: true })} />
+        </div>
+        <div className="form-input">
+          <p>거래일</p>
+          <input type="datetime-local" {...register('transactionDate', { required: true })} />
+        </div>
+        <div className="form-input">
+          <p>카드</p>
+          {/* <input {...register('cardId')} /> */}
+          <select {...register('cardId', { required: true })}>
+            {cards.map((card) => {
+              return (
+                <option key={card.id} value={card.id}>
+                  {card.name}
+                </option>
+              );
+            })}
+          </select>
+        </div>
       </div>
-      <div>
-        <p>금액</p>
-        <input {...register('amount', { valueAsNumber: true, required: true })} />
-      </div>
-      <div>
-        <p>거래일</p>
-        <input type="datetime-local" {...register('transactionDate', { required: true })} />
-      </div>
-      <div>
-        <p>카드</p>
-        {/* <input {...register('cardId')} /> */}
-        <select {...register('cardId', { required: true })}>
-          {cards.map((card) => {
-            return (
-              <option key={card.id} value={card.id}>
-                {card.name}
-              </option>
-            );
-          })}
-        </select>
-      </div>
-      <button type="submit">등록</button>
+      <button type="submit" className="form-submit">
+        등록
+      </button>
     </form>
   );
 }

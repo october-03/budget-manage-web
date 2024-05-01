@@ -14,11 +14,11 @@ export default function StatCard(props: PropsType) {
   return (
     <div style={{ display: 'flex' }} onClick={handleClick}>
       <div>
-        <div>
-          <p>{stat.name}</p>
+        <div style={{ marginBottom: 4 }}>
+          <p style={{ color: '#4F5968', fontSize: 12 }}>{stat.name}</p>
         </div>
         <div>
-          <p>{stat.balance} 원</p>
+          <p style={{ color: '#333D4B', fontWeight: '600', fontSize: 14 }}>{stat.balance.toLocaleString()} 원</p>
         </div>
       </div>
     </div>
