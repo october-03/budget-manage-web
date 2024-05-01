@@ -18,14 +18,21 @@ pipeline {
       }
     }
 
+    stage('stop container') {
+      steps {
+        script {
+          try {
+            sh 'docker stop budget-manage-web'
+            sh 'docker rm budget-manage-web'
+          } catch (e) {
+            echo 'No container to stop'
+          }
+        }
+      }
+    }
+
     stage('deploy') {
       steps {
-        try {
-          sh 'docker stop budget-manage-web'
-          sh 'docker rm budget-manage-web'
-        } catch (Exception e) {
-          echo 'No container to stop'
-        }
         sh 'docker run -d -p 61902:80 --name budget-manage-web budget-manage-web'
       }
     }
