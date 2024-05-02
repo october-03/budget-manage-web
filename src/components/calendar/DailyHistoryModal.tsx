@@ -27,7 +27,7 @@ export default function DailyHistoryModal(props: PropsType) {
             </div>
           </div>
         </div>
-        <HistoryContainer startDate={date} endDate={date} type={type} id="1" />
+        <HistoryContainer startDate={date} endDate={date} type={type} />
       </div>
     </div>
   );
