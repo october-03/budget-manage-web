@@ -4,6 +4,7 @@ import { DailyStat, MonthlyStatsResponse } from '../../types/ApiResponse.dto';
 import dayjs from 'dayjs';
 import CalendarLine from './CalendarLine';
 import DailyHistoryModal from './DailyHistoryModal';
+import DateSelector from '../common/DateSelector';
 
 export default function CalendarContainer() {
   const [data, setData] = useState<DailyStat[][]>([]);
@@ -44,19 +45,8 @@ export default function CalendarContainer() {
     setData(dividedArrays);
   };
 
-  const prevDate = (dateType: 'month' | 'year') => {
-    const newDate = dayjs(date).subtract(1, dateType).startOf('month').format('YYYY-MM-DD');
-    setDate(newDate);
-  };
-
-  const nextDate = (dateType: 'month' | 'year') => {
-    const newDate = dayjs(date).add(1, dateType).startOf('month').format('YYYY-MM-DD');
-
-    if (dayjs(newDate).diff(dayjs(maxDate), 'day') > 0) {
-      setDate(dayjs(maxDate).startOf('month').format('YYYY-MM-DD'));
-      return;
-    }
-    setDate(newDate);
+  const onClick = (currDate: Date) => {
+    setDate(dayjs(currDate).startOf('month').format('YYYY-MM-DD'));
   };
 
   useEffect(() => {
@@ -67,43 +57,10 @@ export default function CalendarContainer() {
     <div>
       <div
         style={{
-          display: 'flex',
+          padding: 10,
         }}
       >
-        <div style={{ display: 'flex' }}>
-          <div
-            onClick={() => {
-              prevDate('year');
-            }}
-          >
-            <p>prev</p>
-          </div>
-          <div>{dayjs(date).year()}</div>
-          <div
-            onClick={() => {
-              nextDate('year');
-            }}
-          >
-            <p>next</p>
-          </div>
-        </div>
-        <div style={{ display: 'flex' }}>
-          <div
-            onClick={() => {
-              prevDate('month');
-            }}
-          >
-            <p>prev</p>
-          </div>
-          <div>{dayjs(date).month() + 1}</div>
-          <div
-            onClick={() => {
-              nextDate('month');
-            }}
-          >
-            <p>next</p>
-          </div>
-        </div>
+        <DateSelector onClick={onClick} />
       </div>
       {data.map((item) => {
         return <CalendarLine data={item} openModal={openModal} />;

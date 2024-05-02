@@ -12,6 +12,7 @@ pipeline {
         slackSend (
           channel: "#jenkins_alert",
           color: "#FFFF00",
+          botUser: true,
           message: "BUILD START: ${env.JOB_NAME} ${env.BUILD_NUMBER}"
         )
       }
@@ -47,6 +48,7 @@ pipeline {
       slackSend (
         channel: "#jenkins_alert",
         color: "#00FF00",
+        botUser: true,
         message: "BUILD SUCCESS: ${env.JOB_NAME} ${env.BUILD_NUMBER}"
       )
     }
@@ -54,6 +56,7 @@ pipeline {
       slackSend (
         channel: "#jenkins_alert",
         color: "#FF0000",
+        botUser: true,
         message: "BUILD FAILURE: ${env.JOB_NAME} ${env.BUILD_NUMBER}"
       )
     }
