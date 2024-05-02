@@ -11,7 +11,7 @@ pipeline {
         '''
         slackSend (
           channel: "#jenkins_alert",
-          color: "#FFFF00"
+          color: "#FFFF00",
           message: "BUILD START: ${env.JOB_NAME} ${env.BUILD_NUMBER}"
         )
       }
@@ -46,14 +46,14 @@ pipeline {
     success {
       slackSend (
         channel: "#jenkins_alert",
-        color: "#00FF00"
+        color: "#00FF00",
         message: "BUILD SUCCESS: ${env.JOB_NAME} ${env.BUILD_NUMBER}"
       )
     }
     failure {
       slackSend (
         channel: "#jenkins_alert",
-        color: "#FF0000"
+        color: "#FF0000",
         message: "BUILD FAILURE: ${env.JOB_NAME} ${env.BUILD_NUMBER}"
       )
     }
