@@ -8,6 +8,7 @@ import {
 import { BankHistory } from '../../types/ApiResponse.dto';
 import CardHistoryCard from './CardHistoryCard';
 import BankHistoryCard from './BankHistoryCard';
+import SelectBox from '../common/SelectBox';
 
 export default function BankHistoryList(req: PropsType) {
   const { id, startDate, endDate, searchKeyword, page, isMore, setPage } = req;
@@ -69,30 +70,20 @@ export default function BankHistoryList(req: PropsType) {
     data.length === count ? isMore(false) : isMore(true);
   }, [data, count]);
 
+  const onClick = (value: string) => {
+    setTransactionType(value);
+  };
+
+  const transactionTypeData = [
+    { value: 'all', label: '전체' },
+    { value: 'INCOME', label: '수입' },
+    { value: 'EXPENSE', label: '지출' },
+  ];
+
   return (
     <div>
-      <div style={{ display: 'flex' }}>
-        <div
-          onClick={() => {
-            setTransactionType('all');
-          }}
-        >
-          전체
-        </div>
-        <div
-          onClick={() => {
-            setTransactionType('INCOME');
-          }}
-        >
-          수입
-        </div>
-        <div
-          onClick={() => {
-            setTransactionType('EXPENSE');
-          }}
-        >
-          지출
-        </div>
+      <div style={{ marginBottom: 10 }}>
+        <SelectBox data={transactionTypeData} onClick={onClick} />
       </div>
       <div>
         <p>차액: {totalAmount.toLocaleString()} 원</p>

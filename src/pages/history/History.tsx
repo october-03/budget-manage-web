@@ -16,9 +16,9 @@ export default function History() {
   };
 
   return (
-    <div style={{ padding: 10 }}>
+    <div style={{ padding: 10, maxWidth: 420, flex: 1 }}>
       <div style={{ display: 'flex' }}>
-        <div style={{ display: 'flex' }}>
+        <div style={{ display: 'flex', marginBottom: 10 }}>
           <DateSelector onClick={onClick} />
         </div>
       </div>

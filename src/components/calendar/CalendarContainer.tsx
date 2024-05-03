@@ -57,7 +57,7 @@ export default function CalendarContainer() {
     <div>
       <div
         style={{
-          padding: 10,
+          padding: 20,
         }}
       >
         <DateSelector onClick={onClick} />

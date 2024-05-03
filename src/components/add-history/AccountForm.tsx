@@ -3,6 +3,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import ApiService from '../../utils/ApiService';
 import { Accounts, SearchAccountsResponse } from '../../types/ApiResponse.dto';
 import dayjs from 'dayjs';
+import SelectBox from '../common/SelectBox';
 
 interface FormInput {
   transactionType: 'INCOME' | 'EXPENSE';
@@ -41,24 +42,20 @@ export default function AccountForm() {
     fetch();
   }, []);
 
+  const handleClick = (value: string) => {
+    setTransactionType(value as 'INCOME' | 'EXPENSE');
+  };
+
+  const typeData = [
+    { value: 'INCOME', label: '수입' },
+    { value: 'EXPENSE', label: '지출' },
+  ];
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="form">
       <div style={{ flex: 1 }}>
-        <div>
-          <div
-            onClick={() => {
-              setTransactionType('INCOME');
-            }}
-          >
-            수입
-          </div>
-          <div
-            onClick={() => {
-              setTransactionType('EXPENSE');
-            }}
-          >
-            지출
-          </div>
+        <div style={{ marginBottom: 20 }}>
+          <SelectBox data={typeData} onClick={handleClick} />
         </div>
         <div className="form-input">
           <p>설명</p>
