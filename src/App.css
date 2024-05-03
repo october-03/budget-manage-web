@@ -23,7 +23,7 @@
 
 .daily-history-modal {
   position: absolute;
-  height: 100vh;
+  height: 100%;
   width: 100vw;
   display: flex;
   top: 0;
