@@ -14,7 +14,7 @@ export default function SubLayout() {
           Back
         </div>
       </div>
-      <div style={{ flex: 1 }}>
+      <div style={{ flex: 1, justifyContent: 'center', display: 'flex' }}>
         <Outlet />
       </div>
     </div>

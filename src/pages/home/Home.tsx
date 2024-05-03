@@ -18,18 +18,20 @@ export default function Home() {
   }, []);
 
   return (
-    <div style={{ padding: 10 }}>
-      <h3 className="home-card-title">계좌</h3>
-      <div className="home-container">
-        {stat.bank.map((bank) => {
-          return <StatCard stat={bank} type="bank" />;
-        })}
-      </div>
-      <h3 className="home-card-title">카드</h3>
-      <div className="home-container">
-        {stat.card.map((card) => {
-          return <StatCard stat={card} type="card" />;
-        })}
+    <div style={{ padding: 10, display: 'flex', justifyContent: 'center' }}>
+      <div style={{ flex: 1, maxWidth: 420 }}>
+        <h3 className="home-card-title">계좌</h3>
+        <div className="home-container">
+          {stat.bank.map((bank) => {
+            return <StatCard stat={bank} type="bank" />;
+          })}
+        </div>
+        <h3 className="home-card-title">카드</h3>
+        <div className="home-container">
+          {stat.card.map((card) => {
+            return <StatCard stat={card} type="card" />;
+          })}
+        </div>
       </div>
     </div>
   );

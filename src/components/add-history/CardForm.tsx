@@ -3,6 +3,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import ApiService from '../../utils/ApiService';
 import { Cards, SearchCardsResponse } from '../../types/ApiResponse.dto';
 import dayjs from 'dayjs';
+import SelectBox from '../common/SelectBox';
 
 interface FormInput {
   paymentType: 'FULL' | 'INSTALLMENTS';
@@ -42,24 +43,20 @@ export default function CardForm() {
     fetch();
   }, []);
 
+  const handleClick = (value: string) => {
+    setPaymentType(value as 'FULL' | 'INSTALLMENTS');
+  };
+
+  const typeData = [
+    { value: 'FULL', label: '일시불' },
+    { value: 'INSTALLMENTS', label: '할부' },
+  ];
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="form">
       <div style={{ flex: 1 }}>
-        <div>
-          <div
-            onClick={() => {
-              setPaymentType('FULL');
-            }}
-          >
-            일시불
-          </div>
-          <div
-            onClick={() => {
-              setPaymentType('INSTALLMENTS');
-            }}
-          >
-            할부
-          </div>
+        <div style={{ marginBottom: 20 }}>
+          <SelectBox data={typeData} onClick={handleClick} />
         </div>
         {paymentType === 'INSTALLMENTS' && (
           <div className="form-input">

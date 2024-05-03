@@ -20,6 +20,7 @@ export default function HistoryContainer(req: PropsType) {
         onChange={(e) => {
           setSearchKeyword(e.target.value);
         }}
+        style={{ marginBottom: 10 }}
       />
       {type === 'card' ? (
         <CardHistoryList

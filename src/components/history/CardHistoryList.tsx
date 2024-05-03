@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { CardSearchHistory, CardSearchInterface } from '../../utils/SearchHistory';
 import { CardHistory } from '../../types/ApiResponse.dto';
 import CardHistoryCard from './CardHistoryCard';
+import SelectBox from '../common/SelectBox';
 
 export default function CardHistoryList(req: PropsType) {
   const { id, startDate, endDate, searchKeyword, page, isMore, setPage } = req;
@@ -63,30 +64,20 @@ export default function CardHistoryList(req: PropsType) {
     data.length === count ? isMore(false) : isMore(true);
   }, [data, count]);
 
+  const transactionTypeData = [
+    { value: 'all', label: '전체' },
+    { value: 'FULL', label: '일시불' },
+    { value: 'INSTALLMENTS', label: '할부' },
+  ];
+
+  const onClick = (value: string) => {
+    setTransactionType(value);
+  };
+
   return (
     <div>
-      <div style={{ display: 'flex' }}>
-        <div
-          onClick={() => {
-            setTransactionType('all');
-          }}
-        >
-          전체
-        </div>
-        <div
-          onClick={() => {
-            setTransactionType('FULL');
-          }}
-        >
-          일시불
-        </div>
-        <div
-          onClick={() => {
-            setTransactionType('INSTALLMENTS');
-          }}
-        >
-          할부
-        </div>
+      <div style={{ marginBottom: 10 }}>
+        <SelectBox data={transactionTypeData} onClick={onClick} />
       </div>
       <div>
         <p>총 지출: {totalAmount.toLocaleString()} 원</p>
